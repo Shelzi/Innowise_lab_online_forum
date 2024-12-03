@@ -1,4 +1,4 @@
-package com.innowise.onlineforum.onlineforum.entity;
+package com.innowise.onlineforum.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

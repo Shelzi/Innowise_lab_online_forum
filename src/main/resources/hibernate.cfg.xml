@@ -4,13 +4,30 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
-        <property name="connection.username">postgres</property>
-        <property name="connection.password">password</property>
-        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <!-- Настройки подключения к базе данных через HikariCP -->
+        <property name="hibernate.hikari.dataSourceClassName">org.postgresql.ds.PGSimpleDataSource</property>
+        <property name="hibernate.hikari.dataSource.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <property name="hibernate.hikari.dataSource.user">postgres</property>
+        <property name="hibernate.hikari.dataSource.password">password</property>
+
+        <!-- Настройки пула подключений HikariCP -->
+        <property name="hibernate.hikari.maximumPoolSize">20</property>
+        <property name="hibernate.hikari.minimumIdle">5</property>
+        <property name="hibernate.hikari.idleTimeout">200000</property>
+        <property name="hibernate.hikari.connectionTimeout">20000</property>
+        <property name="hibernate.hikari.maxLifetime">1500000</property>
+
+        <!-- Дополнительные настройки Hibernate -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="show_sql">true</property>
-        <property name="format_sql">true</property>
+
+        <!-- Маппинг сущностей -->
+        <mapping class="com.innowise.onlineforum.model.entity.User"/>
+        <mapping class="com.innowise.onlineforum.model.entity.UserCredentials"/>
+
+
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
     </session-factory>
