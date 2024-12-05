@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.logging.log4j.core.appender.rolling.action.IfAll;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +21,8 @@ public class User {
     private String username;
     private String email;
     //private UserRole userRole;
-    private boolean isBanned;
+    @Builder.Default
+    private boolean isBanned = false;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false)
     private UserCredentials credentials;

@@ -9,6 +9,8 @@ public class PagePath {
 
     public static final String ERROR = "/WEB-INF/jsp/error.jsp";
 
+    public static final String REGISTER = "/WEB-INF/jsp/register.jsp";
+
     private PagePath() {
     }
 }
