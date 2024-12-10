@@ -6,13 +6,14 @@ import com.innowise.onlineforum.controller.attribute.SessionAttribute;
 import com.innowise.onlineforum.controller.command.ActionCommand;
 import com.innowise.onlineforum.controller.command.CommandResult;
 import com.innowise.onlineforum.exception.CommandException;
+import com.innowise.onlineforum.exception.ServiceException;
 import com.innowise.onlineforum.model.entity.User;
 import com.innowise.onlineforum.model.service.UserService;
 import com.innowise.onlineforum.model.service.serviceimpl.UserServiceImpl;
+import com.innowise.onlineforum.util.MessageManagerUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.hibernate.service.spi.ServiceException;
 
 import java.util.Optional;
 
@@ -34,14 +35,14 @@ public class LoginCommand implements ActionCommand {
                 if (!user.isBanned()) {
                     HttpSession session = request.getSession();
                     session.setAttribute(SessionAttribute.USER, user);
-                    //session.setAttribute(SessionAttribute.CURRENT_ROLE, user.getUserRole());
+                    session.setAttribute(SessionAttribute.CURRENT_ROLE, user.getUserRole());
                     session.setAttribute(SessionAttribute.USER_ID, user.getId());
                     return new CommandResult(SessionAttribute.MAIN_PAGE, CommandResult.Type.REDIRECT);
                 } else {
-                    request.setAttribute(JspAttribute.ERROR_INPUT_DATA_ATTRIBUTE, "test1"/*MessageManager.getProperty("message.bannedOrDeletedError")*/);
+                    request.setAttribute(JspAttribute.ERROR_INPUT_DATA_ATTRIBUTE, MessageManagerUtil.getProperty("message.bannedOrDeletedError"));
                 }
             } else {
-                request.setAttribute(JspAttribute.ERROR_INPUT_DATA_ATTRIBUTE, "test2"/*MessageManager.getProperty("message.loginError")*/);
+                request.setAttribute(JspAttribute.ERROR_INPUT_DATA_ATTRIBUTE, MessageManagerUtil.getProperty("message.loginError"));
             }
         } catch (ServiceException e) {
             throw new CommandException(e);

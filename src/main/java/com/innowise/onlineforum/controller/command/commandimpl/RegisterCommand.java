@@ -7,6 +7,7 @@ import com.innowise.onlineforum.controller.command.ActionCommand;
 import com.innowise.onlineforum.controller.command.CommandResult;
 import com.innowise.onlineforum.exception.CommandException;
 import com.innowise.onlineforum.exception.ServiceException;
+import com.innowise.onlineforum.model.entity.UserRole;
 import com.innowise.onlineforum.model.service.UserService;
 import com.innowise.onlineforum.model.service.serviceimpl.UserServiceImpl;
 import com.innowise.onlineforum.controller.attribute.PagePath;
@@ -16,17 +17,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class RegisterCommand implements ActionCommand {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         String userName = request.getParameter(RequestParameter.USER_NAME);
-
         String email = request.getParameter(RequestParameter.EMAIL);
         String password = request.getParameter(RequestParameter.PASSWORD);
         String repeatedPassword = request.getParameter(RequestParameter.REPEATED_PASSWORD);
-        String userRole = request.getParameter(RequestParameter.USER_ROLE);
+        String userRole = UserRole.AUTHORIZED.name();
 
         Map<String, String> requestFields = new LinkedHashMap<>();
 

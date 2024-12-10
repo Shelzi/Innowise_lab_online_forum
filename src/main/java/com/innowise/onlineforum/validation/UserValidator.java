@@ -51,7 +51,7 @@ public class UserValidator {
         return result;
     }
 
-    private static boolean isUserNameValid(String username) {
+    public static boolean isUserNameValid(String username) {
         if (username == null) {
             return false;
         }
