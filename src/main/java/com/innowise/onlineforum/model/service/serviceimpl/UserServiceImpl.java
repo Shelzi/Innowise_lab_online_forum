@@ -43,7 +43,9 @@ public class UserServiceImpl implements UserService {
             Optional<User> userOptional = userFactory.create(fields);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
-                if (userDao.isEmailAvailable(user.getEmail())) {
+                boolean isEmailAvailable = userDao.isEmailAvailable(user.getEmail());
+                boolean isUsernameAvailable = userDao.isUsernameAvailable(user.getUsername());
+                if (isUsernameAvailable && isEmailAvailable) {
                     String password = fields.get(RequestParameter.PASSWORD);
                     String hashedPassword = PasswordUtil.hashPassword(password);
                     UserCredentials credentials = UserCredentials.builder().passwordHash(hashedPassword).build();
@@ -51,7 +53,8 @@ public class UserServiceImpl implements UserService {
                     user.setCredentials(credentials);
                     result = userDao.save(user);
                 } else {
-                    fields.put(RequestParameter.EMAIL, MessageManagerUtil.getProperty("message.emailInUse"));
+                    if (!isUsernameAvailable) fields.put(RequestParameter.USER_NAME, MessageManagerUtil.getProperty("message.userNameInUse"));
+                    if (!isEmailAvailable) fields.put(RequestParameter.EMAIL, MessageManagerUtil.getProperty("message.emailInUse"));;
                 }
             }
         } catch (DaoException e) {

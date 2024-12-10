@@ -22,4 +22,6 @@ public interface UserDao {
     boolean isEmailAvailable(String email) throws DaoException;
 
     Optional<String> findPasswordByEmail(String email) throws DaoException;
+
+    boolean isUsernameAvailable(String username) throws DaoException;
 }

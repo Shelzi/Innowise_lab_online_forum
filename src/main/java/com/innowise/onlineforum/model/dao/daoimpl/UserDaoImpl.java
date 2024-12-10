@@ -116,4 +116,17 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException("Error finding password by email", e);
         }
     }
+
+    @Override
+    public boolean isUsernameAvailable(String username) throws DaoException {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Long count = session.createQuery(
+                            "SELECT COUNT(u) FROM User u WHERE u.username = :username", Long.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+            return count == 0;
+        } catch (HibernateException e) {
+            throw new DaoException("Error checking username availability", e);
+        }
+    }
 }

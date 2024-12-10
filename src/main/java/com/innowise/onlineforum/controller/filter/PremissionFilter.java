@@ -48,13 +48,13 @@ public class PremissionFilter implements Filter {
         HttpSession session = request.getSession();
         UserRole role = (UserRole) session.getAttribute(SessionAttribute.CURRENT_ROLE);
         Optional<ActionCommand> optionalCommand = CommandProvider.defineCommand(request);
-        if (!optionalCommand.isPresent()) {
+        if (optionalCommand.isEmpty()) {
             chain.doFilter(request, response);
             return;
         }
         EnumSet<CommandType> commands = permissionCommands.get(role);
         Optional<CommandType> command = CommandProvider.defineCommandType(request);
-        if (commands == null || !command.isPresent() || !commands.contains(command.get())) {
+        if (commands == null || command.isEmpty() || !commands.contains(command.get())) {
             logger.log(Level.ERROR, "User hasn't got permission to execute command = " + command);
             RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.MAIN);
             dispatcher.forward(request, response);
