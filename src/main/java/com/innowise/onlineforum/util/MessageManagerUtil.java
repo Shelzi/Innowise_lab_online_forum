@@ -8,7 +8,7 @@ public class MessageManagerUtil {
             ResourceBundle.getBundle("locale.messages",
                     Locale.US);
 
-    private MessageManager() {
+    private MessageManagerUtil() {
     }
 
     public static String getProperty(String key) {

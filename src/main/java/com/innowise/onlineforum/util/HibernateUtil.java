@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
     @Getter
     private static final SessionFactory sessionFactory;
+
     private static final Logger logger = LogManager.getLogger();
 
     static {

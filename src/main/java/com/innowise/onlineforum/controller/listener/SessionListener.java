@@ -11,9 +11,9 @@ import java.util.Locale;
 public class SessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent sessionEvent) {
-        //HttpSession session = sessionEvent.getSession();
-        //session.setAttribute(SessionAttribute.CURRENT_LOCALE, new Locale("ru", "RU"));
-        //session.setAttribute(SessionAttribute.CURRENT_ROLE, UserRole.GUEST);
+        HttpSession session = sessionEvent.getSession();
+        session.setAttribute(SessionAttribute.CURRENT_LOCALE, new Locale("en", "US"));
+        session.setAttribute(SessionAttribute.CURRENT_ROLE, UserRole.GUEST);
     }
 
     @Override

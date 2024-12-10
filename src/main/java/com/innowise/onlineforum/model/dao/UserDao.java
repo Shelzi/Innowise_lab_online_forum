@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao {
-    void save(User user) throws DaoException;
+    boolean save(User user) throws DaoException;
 
     void update(User user) throws DaoException;
 
