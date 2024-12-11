@@ -12,4 +12,6 @@ public class RequestParameter {
     public static final String USER_ROLE = "userRole";
 
     public static final String EMPTY_USERNAME = "emptyUsername";
+
+    public static final String CATEGORY_NAME = "categoryName";
 }

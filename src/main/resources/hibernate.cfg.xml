@@ -30,9 +30,8 @@
         <!-- Маппинг сущностей -->
         <mapping class="com.innowise.onlineforum.model.entity.User"/>
         <mapping class="com.innowise.onlineforum.model.entity.UserCredentials"/>
+        <mapping class="com.innowise.onlineforum.model.entity.Topic"/>
+        <mapping class="com.innowise.onlineforum.model.entity.Reply"/>
 
-
-        <!-- DB schema will be updated if needed -->
-        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
     </session-factory>
 </hibernate-configuration>

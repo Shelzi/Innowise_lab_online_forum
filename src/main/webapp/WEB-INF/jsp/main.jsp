@@ -1,6 +1,7 @@
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="/WEB-INF/jsp/header.jsp" />
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<jsp:include page="/WEB-INF/jsp/header.jsp"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,23 +12,33 @@
         body {
             padding-top: 56px;
         }
+
         .banner {
             background-color: #f8f9fa;
             padding: 60px 0;
             text-align: center;
         }
+
         .footer {
             background-color: #343a40;
             color: white;
             padding: 20px 0;
             margin-top: 40px;
         }
+
         .category-card {
             margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
+
+<c:if test="${not empty sessionScope.successMessage}">
+    <div class="alert alert-success text-center" role="alert">
+        <fmt:message key="message.successRegistration"/>
+    </div>
+    <c:remove var="successMessage" scope="session"/>
+</c:if>
 
 <div class="banner">
     <div class="container">
@@ -70,6 +81,16 @@
     </div>
 </div>
 
+<div class="container my-5">
+    <h2 class="mb-4"Тесты</h2>
+    <div class="list-group">
+        <a href="${pageContext.request.contextPath}/topics" class="list-group-item list-group-item-action">Список топиков</a>
+        <a href="${pageContext.request.contextPath}/create_topic" class="list-group-item list-group-item-action">Создать новый топик</a>
+        <a href="${pageContext.request.contextPath}/topic/1" class="list-group-item list-group-item-action">Просмотр топика с ID 1</a>
+    </div>
+</div>
+
+
 <footer class="footer">
     <div class="container text-center">
         <p><fmt:message key="footer.copyright"/>.
@@ -83,6 +104,5 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

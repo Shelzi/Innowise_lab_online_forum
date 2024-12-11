@@ -43,4 +43,31 @@
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateTopic</servlet-name>
+        <jsp-file>/WEB-INF/jsp/create_topic.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateTopic</servlet-name>
+        <url-pattern>/create_topic</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Topic</servlet-name>
+        <jsp-file>/WEB-INF/jsp/topic.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Topic</servlet-name>
+        <url-pattern>/topic</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Topics</servlet-name>
+        <jsp-file>/WEB-INF/jsp/topics.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Topics</servlet-name>
+        <url-pattern>/topics</url-pattern>
+    </servlet-mapping>
 </web-app>

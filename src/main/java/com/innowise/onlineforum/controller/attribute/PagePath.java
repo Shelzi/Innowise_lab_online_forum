@@ -11,6 +11,8 @@ public class PagePath {
 
     public static final String REGISTER = "/WEB-INF/jsp/register.jsp";
 
+    public static final String TOPICS = "/WEB-INF/jsp/topics.jsp";
+
     private PagePath() {
     }
 }
