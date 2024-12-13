@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> findById(int id) throws DaoException {
+    public Optional<User> findById(Long id) throws DaoException {
         return Optional.empty();
     }
 

@@ -12,4 +12,8 @@ public interface TopicDao {
     List<Topic> findByCategory(String category) throws DaoException;
 
     Optional<Topic> findById(Long id) throws DaoException;
+
+    boolean createTopic(Topic topic) throws DaoException;
+
+    boolean deleteTopic(Long topicId) throws DaoException;
 }

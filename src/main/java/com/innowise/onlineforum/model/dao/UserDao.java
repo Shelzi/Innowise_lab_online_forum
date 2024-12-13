@@ -13,7 +13,7 @@ public interface UserDao {
 
     void delete(User user) throws DaoException;
 
-    Optional<User> findById(int id) throws DaoException;
+    Optional<User> findById(Long id) throws DaoException;
 
     List<User> findAll() throws DaoException;
 

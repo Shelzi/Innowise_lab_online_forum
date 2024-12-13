@@ -4,8 +4,10 @@ import com.innowise.onlineforum.exception.DaoException;
 import com.innowise.onlineforum.model.dao.TopicDao;
 import com.innowise.onlineforum.model.entity.Topic;
 import com.innowise.onlineforum.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -34,51 +36,72 @@ public class TopicDaoImpl implements TopicDao {
 
     @Override
     public List<Topic> findAll() throws DaoException {
-        List<Topic> topics;
-        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
             Query<Topic> query = session.createQuery("FROM Topic ORDER BY createdAt DESC", Topic.class);
-            topics = query.list();
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            throw new DaoException("Error when retrieving the topics list", e);
+            return query.list();
+        } catch (HibernateException e) {
+            throw new DaoException("Hibernate error while fetching all topics.", e);
         }
-        return topics;
     }
 
     @Override
     public List<Topic> findByCategory(String category) throws DaoException {
-        List<Topic> topics;
-        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
             Query<Topic> query = session.createQuery(
                     "FROM Topic WHERE category = :category ORDER BY createdAt DESC", Topic.class);
             query.setParameter("category", category);
-            topics = query.list();
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            throw new DaoException("Error when retrieving tops by category", e);
+            return query.list();
+        } catch (HibernateException e) {
+            throw new DaoException("Hibernate error while fetching topics by category.", e);
         }
-        return topics;
     }
 
     @Override
     public Optional<Topic> findById(Long id) throws DaoException {
-        Optional<Topic> topicOptional;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Topic topic = session.get(Topic.class, id);
+            return Optional.ofNullable(topic);
+        } catch (HibernateException e) {
+            throw new DaoException("Hibernate error while fetching topic by ID.", e);
+        }
+    }
+
+    @Override
+    public boolean createTopic(Topic topic) throws DaoException {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            Topic topic = session.get(Topic.class, id);
-            topicOptional = Optional.ofNullable(topic);
+            session.persist(topic);
             transaction.commit();
-        } catch (Exception e) {
+            return true;
+        } catch (ConstraintViolationException e) {
             if (transaction != null) transaction.rollback();
-            throw new DaoException("Error when searching for a topic by ID", e);
+            throw new DaoException("Constraint violation while creating topic.", e);
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            throw new DaoException("Hibernate error while creating topic.", e);
         }
-        return topicOptional;
+    }
+
+    @Override
+    public boolean deleteTopic(Long topicId) throws DaoException {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            Topic topic = session.get(Topic.class, topicId);
+            if (topic == null) {
+                transaction.rollback();
+                return false;
+            }
+            session.remove(topic);
+            transaction.commit();
+            return true;
+        } catch (ConstraintViolationException e) {
+            if (transaction != null) transaction.rollback();
+            throw new DaoException("Constraint violation while deleting topic.", e);
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            throw new DaoException("Hibernate error while deleting topic.", e);
+        }
     }
 }
