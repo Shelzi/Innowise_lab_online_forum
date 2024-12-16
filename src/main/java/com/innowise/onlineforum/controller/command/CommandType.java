@@ -1,9 +1,6 @@
 package com.innowise.onlineforum.controller.command;
 
-import com.innowise.onlineforum.controller.command.commandimpl.LoginCommand;
-import com.innowise.onlineforum.controller.command.commandimpl.LogoutCommand;
-import com.innowise.onlineforum.controller.command.commandimpl.RegisterCommand;
-import com.innowise.onlineforum.controller.command.commandimpl.TopicsListCommand;
+import com.innowise.onlineforum.controller.command.commandimpl.*;
 import com.innowise.onlineforum.exception.CommandException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,6 +24,16 @@ public enum CommandType {
     TOPIC_LIST {
         {
             this.command = new TopicsListCommand();
+        }
+    },
+    DELETE_TOPIC {
+        {
+            this.command = new DeleteTopicCommand();
+        }
+    },
+    CREATE_TOPIC {
+        {
+            this.command = new CreateTopicCommand();
         }
     };
 

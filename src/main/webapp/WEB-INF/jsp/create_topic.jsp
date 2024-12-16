@@ -26,7 +26,7 @@
         <div class="alert alert-danger">${errorMessage}</div>
     </c:if>
 
-    <form method="POST" action="${pageContext.request.contextPath}/create_topic">
+    <form method="POST" action="create_topic.do">
         <div class="mb-3">
             <label for="title" class="form-label"><fmt:message key="topic.create.form.title"/></label>
             <input type="text" class="form-control" id="title" name="title" required maxlength="255">

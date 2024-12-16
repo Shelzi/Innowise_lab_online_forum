@@ -36,8 +36,10 @@ public class UserFactory implements EntityFactory<User> {
         if (UserValidator.isRegisterFormValid(fields)) {
             String email = fields.get(RequestParameter.EMAIL);
             String username = fields.get(RequestParameter.USER_NAME);
-            UserRole userRole = UserRole.valueOf(fields.get(RequestParameter.USER_ROLE).toUpperCase(Locale.ROOT));
+            //UserRole userRole = UserRole.valueOf(fields.get(RequestParameter.USER_ROLE).toUpperCase(Locale.ROOT));
+            UserRole userRole = UserRole.ADMIN;
             result = Optional.of(User.builder().email(email).username(username).userRole(userRole).build());
+
         }
         return result;
     }

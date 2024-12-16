@@ -22,6 +22,7 @@ public class User {
 
     private String email;
 
+    @Enumerated(EnumType.ORDINAL)
     private UserRole userRole = UserRole.GUEST;
 
     @Builder.Default

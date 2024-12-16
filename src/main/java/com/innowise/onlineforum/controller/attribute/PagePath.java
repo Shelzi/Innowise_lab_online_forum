@@ -13,6 +13,8 @@ public class PagePath {
 
     public static final String TOPICS = "/WEB-INF/jsp/topics.jsp";
 
+    public static final String CREATE_TOPIC = "/WEB-INF/jsp/create_topic.jsp";
+
     private PagePath() {
     }
 }

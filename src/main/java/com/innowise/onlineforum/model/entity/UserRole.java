@@ -8,9 +8,9 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum UserRole {
-    AUTHORIZED(1),
-    ADMIN(2),
-    GUEST(3);
+    AUTHORIZED(0),
+    ADMIN(1),
+    GUEST(2);
 
     private final int roleId;
 

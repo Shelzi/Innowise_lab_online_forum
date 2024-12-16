@@ -15,9 +15,9 @@ public class RequestParameter {
 
     public static final String CATEGORY_NAME = "categoryName";
 
-    public static final String TOPIC_TITLE = "topicTitle";
+    public static final String TOPIC_TITLE = "title";
 
-    public static final String TOPIC_BODY = "topicBody";
+    public static final String TOPIC_BODY = "body";
 
-    public static final String TOPIC_CATEGORY = "topicCategory";
+    public static final String TOPIC_CATEGORY = "category";
 }
