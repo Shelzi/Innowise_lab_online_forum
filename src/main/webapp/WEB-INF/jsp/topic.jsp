@@ -1,8 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<fmt:setLocale value="${sessionScope.currentLocale}"/>
-<fmt:setBundle basename="locale.messages"/>
+<%@ include file="/WEB-INF/jsp/header.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +16,6 @@
     </style>
 </head>
 <body>
-
-<jsp:include page="/WEB-INF/jsp/header.jsp"/>
 
 <div class="container my-5">
     <h1 class="mb-4">${topic.title}</h1>

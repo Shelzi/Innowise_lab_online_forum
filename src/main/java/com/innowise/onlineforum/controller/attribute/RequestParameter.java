@@ -20,4 +20,10 @@ public class RequestParameter {
     public static final String TOPIC_BODY = "body";
 
     public static final String TOPIC_CATEGORY = "category";
+
+    public static final String TOPIC_ID = "topicId";
+
+    public static final String TOPIC_PINNED = "topicPinned";
+
+    public static final String TOPIC_RATING = "topicRating";
 }

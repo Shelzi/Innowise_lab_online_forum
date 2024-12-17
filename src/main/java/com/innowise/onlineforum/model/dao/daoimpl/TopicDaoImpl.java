@@ -104,4 +104,18 @@ public class TopicDaoImpl implements TopicDao {
             throw new DaoException("Hibernate error while deleting topic.", e);
         }
     }
+
+    @Override
+    public boolean updateTopic(Topic topic) throws DaoException {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.merge(topic);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            throw new DaoException("Error updating topic", e);
+        }
+    }
 }

@@ -16,4 +16,6 @@ public interface TopicDao {
     boolean createTopic(Topic topic) throws DaoException;
 
     boolean deleteTopic(Long topicId) throws DaoException;
+
+    boolean updateTopic(Topic topic) throws DaoException;
 }

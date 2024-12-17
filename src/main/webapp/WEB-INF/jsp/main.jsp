@@ -1,8 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<jsp:include page="/WEB-INF/jsp/header.jsp"/>
-<!DOCTYPE html>
+<%@ include file="/WEB-INF/jsp/header.jsp" %><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -82,11 +78,11 @@
 </div>
 
 <div class="container my-5">
-    <h2 class="mb-4"Тесты</h2>
+    <h2 class="mb-4">Tests</h2>
     <div class="list-group">
-        <a href="${pageContext.request.contextPath}/topics" class="list-group-item list-group-item-action">Список топиков</a>
-        <a href="${pageContext.request.contextPath}/create_topic" class="list-group-item list-group-item-action">Создать новый топик</a>
-        <a href="${pageContext.request.contextPath}/topic/1" class="list-group-item list-group-item-action">Просмотр топика с ID 1</a>
+        <a href="${pageContext.request.contextPath}/topics" class="list-group-item list-group-item-action">Topic list</a>
+        <a href="${pageContext.request.contextPath}/create_topic" class="list-group-item list-group-item-action">New topic</a>
+        <a href="${pageContext.request.contextPath}/topic/1" class="list-group-item list-group-item-action">Topic id 1</a>
     </div>
 </div>
 

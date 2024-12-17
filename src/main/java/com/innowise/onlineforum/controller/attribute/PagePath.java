@@ -15,6 +15,10 @@ public class PagePath {
 
     public static final String CREATE_TOPIC = "/WEB-INF/jsp/create_topic.jsp";
 
+    public static final String UPDATE_TOPIC_JSP = "/WEB-INF/jsp/update_topic.jsp";
+
+    public static final String VIEW_TOPIC_JSP = "/WEB-INF/jsp/topic.jsp";
+
     private PagePath() {
     }
 }

@@ -16,5 +16,7 @@ public interface    TopicService {
 
     boolean createTopic(Map<String, String> fields) throws ServiceException;
 
-    boolean deleteTopic(Long id) throws ServiceException;
+    boolean deleteTopic(Long topicId, long userId) throws ServiceException;
+
+    boolean updateTopic(Map<String, String> fields) throws ServiceException;
 }

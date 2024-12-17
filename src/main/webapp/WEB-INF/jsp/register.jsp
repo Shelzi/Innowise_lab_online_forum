@@ -1,8 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<fmt:setLocale value="${sessionScope.currentLocale}"/>
-<fmt:setBundle basename="locale.messages"/>
+<%@ include file="/WEB-INF/jsp/header.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +11,6 @@
           crossorigin="anonymous">
 </head>
 <body class="bg-light">
-
-<jsp:include page="/WEB-INF/jsp/header.jsp" />
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -35,7 +28,8 @@
                     <form name="registrationForm" method="POST" action="register.do">
                         <div class="mb-3">
                             <label for="userName" class="form-label"><fmt:message key="registration.username"/></label>
-                            <input type="text" class="form-control" id="userName" name="userName" value="${userName}" required>
+                            <input type="text" class="form-control" id="userName" name="userName" value="${userName}"
+                                   required>
                         </div>
 
                         <div class="mb-3">
@@ -45,16 +39,20 @@
 
                         <div class="mb-3">
                             <label for="password" class="form-label"><fmt:message key="registration.password"/></label>
-                            <input type="password" class="form-control" id="password" name="password" value="${password}" required>
+                            <input type="password" class="form-control" id="password" name="password"
+                                   value="${password}" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="repeatedPassword" class="form-label"><fmt:message key="registration.repeatPassword"/></label>
-                            <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword" value="${repeatedPassword}" required>
+                            <label for="repeatedPassword" class="form-label"><fmt:message
+                                    key="registration.repeatPassword"/></label>
+                            <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword"
+                                   value="${repeatedPassword}" required>
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-primary"><fmt:message key="registration.registerButton"/></button>
+                            <button type="submit" class="btn btn-primary"><fmt:message
+                                    key="registration.registerButton"/></button>
                             <a href="${pageContext.request.contextPath}/login" class="btn btn-secondary">
                                 <fmt:message key="registration.backToLogin"/>
                             </a>

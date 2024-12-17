@@ -28,11 +28,21 @@ public class PremissionFilter implements Filter {
     public void init(FilterConfig filterConfig) {
         //EnumSet<CommandType> sameCommands = EnumSet.of(CommandType.CHANGE_LANGUAGE);
 
-        EnumSet<CommandType> guestCommands = EnumSet.of(CommandType.REGISTER, CommandType.LOGIN, CommandType.TOPIC_LIST);
+        EnumSet<CommandType> guestCommands = EnumSet.of(CommandType.REGISTER,
+                CommandType.LOGIN,
+                CommandType.TOPIC_LIST);
 
-        EnumSet<CommandType> adminCommands = EnumSet.of(CommandType.LOGOUT, CommandType.DELETE_TOPIC);
+        EnumSet<CommandType> adminCommands = EnumSet.of(CommandType.LOGOUT,
+                CommandType.DELETE_TOPIC,
+                CommandType.UPDATE_TOPIC,
+                CommandType.TOPIC_LIST,
+                CommandType.CREATE_TOPIC,
+                CommandType.VIEW_TOPIC);
 
-        EnumSet<CommandType> authorizedCommands = EnumSet.of(CommandType.LOGOUT,  CommandType.TOPIC_LIST, CommandType.CREATE_TOPIC); // more in a future // don't like this name
+        EnumSet<CommandType> authorizedCommands = EnumSet.of(CommandType.LOGOUT,
+                CommandType.TOPIC_LIST,
+                CommandType.CREATE_TOPIC,
+                CommandType.VIEW_TOPIC);
 
         permissionCommands.put(UserRole.GUEST, guestCommands);
         permissionCommands.put(UserRole.ADMIN, adminCommands);

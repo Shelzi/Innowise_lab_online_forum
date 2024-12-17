@@ -1,5 +1,6 @@
 package com.innowise.onlineforum.model.service.serviceimpl;
 
+import com.innowise.onlineforum.controller.attribute.RequestParameter;
 import com.innowise.onlineforum.exception.DaoException;
 import com.innowise.onlineforum.exception.ServiceException;
 import com.innowise.onlineforum.model.dao.TopicDao;
@@ -73,7 +74,6 @@ public class TopicServiceImpl implements TopicService {
             Optional<Topic> topicOptional = topicFactory.create(fields);
             if (topicOptional.isPresent()) {
                 Topic topic = topicOptional.get();
-                // Здесь предполагается, что поле "userId" присутствует в карте
                 String userIdStr = fields.get("userId");
                 if (userIdStr == null || userIdStr.trim().isEmpty()) {
                     fields.put("userId", "User ID is missing.");
@@ -102,11 +102,46 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public boolean deleteTopic(Long id) throws ServiceException {
+    public boolean deleteTopic(Long topicId, long userId) throws ServiceException {
         try {
-            return topicDao.deleteTopic(id);
+            Optional<Topic> topicOpt = topicDao.findById(topicId);
+            if (topicOpt.isPresent()) {
+                Topic topic = topicOpt.get();
+                if (topic.getUser().getId() == userId) {
+                    return topicDao.deleteTopic(topicId);
+                }
+            }
+            return false;
         } catch (DaoException e) {
             throw new ServiceException("Error deleting topic.", e);
+        }
+    }
+
+    @Override
+    public boolean updateTopic(Map<String, String> fields) throws ServiceException {
+        try {
+            Optional<Topic> topicOptional = topicFactory.create(fields);
+            if (topicOptional.isPresent()) {
+                Topic topic = topicOptional.get();
+                String topicIdStr = fields.get(RequestParameter.TOPIC_ID);
+                if (topicIdStr == null || topicIdStr.trim().isEmpty()) {
+                    return false;
+                }
+                Long topicId = Long.parseLong(topicIdStr);
+                Optional<Topic> existingTopicOpt = topicDao.findById(topicId);
+                if (existingTopicOpt.isPresent()) {
+                    Topic existingTopic = existingTopicOpt.get();
+                    existingTopic.setTitle(topic.getTitle());
+                    existingTopic.setBody(topic.getBody());
+                    existingTopic.setCategory(topic.getCategory());
+                    existingTopic.setPinned(Boolean.parseBoolean(fields.get(RequestParameter.TOPIC_PINNED)));
+                    existingTopic.setRating(Integer.parseInt(fields.get(RequestParameter.TOPIC_RATING)));
+                    return topicDao.updateTopic(existingTopic);
+                }
+            }
+            return false;
+        } catch (NumberFormatException | DaoException e) {
+            throw new ServiceException("Error updating topic.", e);
         }
     }
 }

@@ -1,7 +1,4 @@
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<fmt:setLocale value="${sessionScope.currentLocale}"/>
-<fmt:setBundle basename="locale.messages"/>
+<%@ include file="/WEB-INF/jsp/header.jsp" %>
 <!DOCTYPE html>
 <html lang="${sessionScope.currentLocale.language}">
 <head>
@@ -10,9 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-<jsp:include page="/WEB-INF/jsp/header.jsp" />
-
 <div class="container my-5">
     <h1 class="mb-4"><fmt:message key="topics.heading"/></h1>
 
@@ -39,7 +33,8 @@
                 </h5>
                 <h6 class="card-subtitle mb-2 text-muted">
                     <fmt:message key="topics.author"/>: ${topic.user.username} |
-                    <fmt:message key="topics.createdAt"/>: <fmt:formatDate value="${topic.createdAt}" pattern="dd.MM.yyyy HH:mm"/> |
+                    <fmt:message key="topics.createdAt"/>: <fmt:formatDate value="${topic.createdAt}"
+                                                                           pattern="dd.MM.yyyy HH:mm"/> |
                     <fmt:message key="topics.rating"/>: ${topic.rating}
                 </h6>
                 <p class="card-text">${topic.body}</p>
@@ -48,18 +43,22 @@
                 </a>
 
                 <div class="mt-2">
-                    <a href="${pageContext.request.contextPath}/topic/${topic.id}/like" class="btn btn-sm btn-outline-success">
+                    <a href="${pageContext.request.contextPath}/topic/${topic.id}/like"
+                       class="btn btn-sm btn-outline-success">
                         <fmt:message key="topics.like"/>
                     </a>
-                    <a href="${pageContext.request.contextPath}/topic/${topic.id}/dislike" class="btn btn-sm btn-outline-danger">
+                    <a href="${pageContext.request.contextPath}/topic/${topic.id}/dislike"
+                       class="btn btn-sm btn-outline-danger">
                         <fmt:message key="topics.dislike"/>
                     </a>
 
                     <c:if test="${sessionScope.currentRole == 'ADMIN'}">
-                        <a href="${pageContext.request.contextPath}/admin/pin_topic/${topic.id}" class="btn btn-sm btn-outline-primary ms-2">
+                        <a href="${pageContext.request.contextPath}/admin/pin_topic/${topic.id}"
+                           class="btn btn-sm btn-outline-primary ms-2">
                             <fmt:message key="topics.pin"/>
                         </a>
-                        <a href="${pageContext.request.contextPath}/admin/delete_topic/${topic.id}" class="btn btn-sm btn-outline-danger ms-2">
+                        <a href="${pageContext.request.contextPath}/admin/delete_topic/${topic.id}"
+                           class="btn btn-sm btn-outline-danger ms-2">
                             <fmt:message key="topics.delete"/>
                         </a>
                     </c:if>

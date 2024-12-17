@@ -52,12 +52,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void update(User user) throws DaoException {
-
     }
 
     @Override
     public void delete(User user) throws DaoException {
-
     }
 
     @Override
