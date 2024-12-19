@@ -60,7 +60,19 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findById(Long id) throws DaoException {
-        return Optional.empty();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            try {
+                User user = session.createQuery(
+                                "FROM User u WHERE u.id = :id", User.class)
+                        .setParameter("id", id)
+                        .getSingleResult();
+                return Optional.of(user);
+            } catch (NoResultException e) {
+                return Optional.empty();
+            }
+        } catch (HibernateException e) {
+            throw new DaoException("Error finding user by id", e);
+        }
     }
 
     @Override

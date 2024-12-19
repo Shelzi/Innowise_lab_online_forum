@@ -45,7 +45,13 @@ public enum CommandType {
         {
             this.command = new ViewTopicCommand();
         }
+    },
+    SHOW_CREATE_TOPIC {
+        {
+            this.command = new ShowCreateTopicCommand();
+        }
     };
+
 
     ActionCommand command;
 

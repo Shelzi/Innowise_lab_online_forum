@@ -37,7 +37,7 @@ public class TopicDaoImpl implements TopicDao {
     @Override
     public List<Topic> findAll() throws DaoException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Topic> query = session.createQuery("FROM Topic ORDER BY createdAt DESC", Topic.class);
+            Query<Topic> query = session.createQuery("FROM Topic t JOIN FETCH t.user ORDER BY t.createdAt DESC", Topic.class);
             return query.list();
         } catch (HibernateException e) {
             throw new DaoException("Hibernate error while fetching all topics.", e);

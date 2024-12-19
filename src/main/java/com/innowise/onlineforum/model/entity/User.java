@@ -18,6 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Basic(fetch = FetchType.EAGER)
     private String username;
 
     private String email;

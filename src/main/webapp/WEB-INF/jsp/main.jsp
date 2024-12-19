@@ -80,8 +80,16 @@
 <div class="container my-5">
     <h2 class="mb-4">Tests</h2>
     <div class="list-group">
-        <a href="${pageContext.request.contextPath}/topics" class="list-group-item list-group-item-action">Topic list</a>
-        <a href="${pageContext.request.contextPath}/create_topic" class="list-group-item list-group-item-action">New topic</a>
+        <form name="showCreateTopicForm" action="topic_list.do" method="get">
+            <button type="submit" class="btn btn-primary">New Topic</button>
+        </form>
+        <form name="showCreateTopicForm" action="topic_list.do" method="post">
+            <button type="submit" class="btn btn-primary">New Topic</button>
+        </form>
+        <form name="showCreateTopicForm" action="show_create_topic.do" method="get">
+            <button type="submit" class="btn btn-primary">New Topic</button>
+        </form>
+        <a href="${pageContext.request.contextPath}/topic_list.do" class="list-group-item list-group-item-action">Topic list</a>
         <a href="${pageContext.request.contextPath}/topic/1" class="list-group-item list-group-item-action">Topic id 1</a>
     </div>
 </div>

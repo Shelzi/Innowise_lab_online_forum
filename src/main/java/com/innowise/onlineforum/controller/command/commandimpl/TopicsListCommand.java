@@ -30,7 +30,7 @@ public class TopicsListCommand implements ActionCommand {
             } else {
                 topics = topicService.getAllTopics();
             }
-            request.setAttribute(JspAttribute.TOPICS_LIST, topics);
+            request.setAttribute("topicList", topics);
             return new CommandResult(PagePath.TOPICS, CommandResult.Type.FORWARD);
         } catch (ServiceException e) {
             // todo logger

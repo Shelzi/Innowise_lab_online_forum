@@ -1,4 +1,5 @@
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
+<%@ taglib uri="https://example.com/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="${sessionScope.currentLocale.language}">
 <head>
@@ -19,11 +20,11 @@
         </div>
     </c:if>
 
-    <c:if test="${empty topics}">
+    <c:if test="${empty topicList}">
         <div class="alert alert-warning"><fmt:message key="topics.noTopics"/></div>
     </c:if>
 
-    <c:forEach var="topic" items="${topics}">
+    <c:forEach var="topic" items="${topicList}" varStatus="loop">
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">
@@ -33,8 +34,7 @@
                 </h5>
                 <h6 class="card-subtitle mb-2 text-muted">
                     <fmt:message key="topics.author"/>: ${topic.user.username} |
-                    <fmt:message key="topics.createdAt"/>: <fmt:formatDate value="${topic.createdAt}"
-                                                                           pattern="dd.MM.yyyy HH:mm"/> |
+                    <fmt:message key="topics.createdAt"/>: ${fn:formatLocalDateTime(topic.createdAt, 'dd-MM-yyyy HH:mm:ss')} |
                     <fmt:message key="topics.rating"/>: ${topic.rating}
                 </h6>
                 <p class="card-text">${topic.body}</p>

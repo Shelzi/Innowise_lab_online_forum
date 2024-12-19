@@ -8,6 +8,7 @@ import com.innowise.onlineforum.controller.command.ActionCommand;
 import com.innowise.onlineforum.controller.command.CommandResult;
 import com.innowise.onlineforum.exception.CommandException;
 import com.innowise.onlineforum.exception.ServiceException;
+import com.innowise.onlineforum.model.entity.CategoryConstants;
 import com.innowise.onlineforum.model.entity.User;
 import com.innowise.onlineforum.model.service.TopicService;
 import com.innowise.onlineforum.model.service.serviceimpl.TopicServiceImpl;
@@ -27,12 +28,20 @@ public class CreateTopicCommand implements ActionCommand {
         User user = (User) session.getAttribute(SessionAttribute.USER);
         Map<String, String> fields = createFieldsMap(request, user);
 
+        String topicCategory = request.getParameter(RequestParameter.TOPIC_CATEGORY);
+
+        if (topicCategory == null || !CategoryConstants.CATEGORIES.contains(topicCategory)) {
+            request.setAttribute(JspAttribute.ERROR_INPUT_DATA, "createTopic.error.invalidCategory");
+            return new CommandResult(PagePath.CREATE_TOPIC, CommandResult.Type.FORWARD);
+        }
+
         try {
             boolean isCreated = topicService.createTopic(fields);
             if (isCreated) {
-                return new CommandResult(PagePath.TOPICS, CommandResult.Type.REDIRECT);
+                return new CommandResult(PagePath.TOPICS, CommandResult.Type.FORWARD);
             } else {
                 request.setAttribute(JspAttribute.ERROR_INPUT_DATA, "Failed to create topic.");
+                request.setAttribute("categories", CategoryConstants.CATEGORIES);
                 return new CommandResult(PagePath.CREATE_TOPIC, CommandResult.Type.FORWARD);
             }
         } catch (ServiceException e) {

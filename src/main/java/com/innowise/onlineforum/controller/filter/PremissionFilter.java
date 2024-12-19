@@ -37,12 +37,14 @@ public class PremissionFilter implements Filter {
                 CommandType.UPDATE_TOPIC,
                 CommandType.TOPIC_LIST,
                 CommandType.CREATE_TOPIC,
-                CommandType.VIEW_TOPIC);
+                CommandType.VIEW_TOPIC,
+                CommandType.SHOW_CREATE_TOPIC);
 
         EnumSet<CommandType> authorizedCommands = EnumSet.of(CommandType.LOGOUT,
                 CommandType.TOPIC_LIST,
                 CommandType.CREATE_TOPIC,
-                CommandType.VIEW_TOPIC);
+                CommandType.VIEW_TOPIC,
+                CommandType.SHOW_CREATE_TOPIC);
 
         permissionCommands.put(UserRole.GUEST, guestCommands);
         permissionCommands.put(UserRole.ADMIN, adminCommands);
